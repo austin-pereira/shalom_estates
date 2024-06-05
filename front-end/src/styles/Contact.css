@@ -1,0 +1,32 @@
+.contact-container {
+    display: flex;
+    flex-direction: column; /* Arrange elements vertically */
+    align-items: center;    /* Center horizontally */
+    padding: 20px;
+    background-color: #205375; /* Dark teal background */
+    color: white;            /* White text */
+    min-height: 100vh;       /* Ensure footer stays at bottom */
+  }
+  
+  .contact-info {
+    text-align: center;
+    margin-bottom: 20px; 
+  }
+  
+  .logo-container {
+    flex-grow: 1;          /* Push logo down */
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Align logo to bottom */
+  }
+  
+  .logo-container img {
+    max-width: 100px;      /* Adjust logo size as needed */
+  }
+  
+  .footer {
+    text-align: center;
+    padding: 10px 0;        /* Add some padding */
+    width: 100%;             /* Extend footer to full width */
+  }
+  
