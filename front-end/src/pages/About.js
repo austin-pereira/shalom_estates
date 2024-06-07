@@ -86,48 +86,56 @@ const AboutUsImage = styled.img`
 const TestimonialContainer = styled.div`
   display: flex;     /* Use flexbox for layout */
   align-items: center; /* Vertically align items */
-  justify-content: center; /* Horizontally center items */
-  text-align: center;
-  padding-top: 150px;
-  padding-bottom: 150px;
+  position: relative;  /* Needed for absolute positioning of arrow buttons */
   background-color: #CECECE; /* Or your preferred background color */
-  width: 100%;           /* Increase container width to 80% */
-  margin: 0 auto;   
-  position: relative;     /* Center container on the page */
+  padding: 150px 20px; /* Top and bottom padding and horizontal padding */
+  width: 100%;         /* Full width */
+  overflow: hidden;    /* Prevents overflow of children outside the container */
+`;
+
+// Wraps the text and centers it absolutely within TestimonialContainer
+const TestimonialWrapper = styled.div`
+  width: calc(100% - 6px); /* full width minus some padding for arrows */
+  max-width: 800px; /* Maximum width to control the size on larger screens */
+  margin: 0 auto;   /* Auto margins for horizontal centering */
+  text-align: center; /* Ensures text is centered */
+  position: relative; /* Context for positioning text content */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const TestimonialText = styled.p`
   font-size: 1.2rem;
-  margin-bottom: 10px;
-  color: black; // Set text color to white
+  color: black;
+  margin: 0; /* Removes default paragraph margin */
 `;
 
 const TestimonialAuthor = styled.p`
   font-style: italic;
-  color: black; // Set text color to white
+  color: black;
 `;
 
 const ArrowButton = styled.button`
-  background-color: #4CAF50; /* Green */
+  background-color: #4CAF50; // Green
   border: none;
   color: white;
   padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
   font-size: 16px;
-  margin: 4px 5px;
-  cursor: pointer;
   border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%); // Center vertically
 `;
 
 const LeftArrowButton = styled(ArrowButton)`
-  left: 100px; /* Adjust as needed for spacing */
+  left: 290px; /* Positioned close to the left edge */
 `;
 
 const RightArrowButton = styled(ArrowButton)`
-  right: 20px; /* Adjust as needed for spacing */
+  right: 300px; /* Positioned close to the right edge */
 `;
+
 
 const OurMissionContainer = styled.div`
   background-color: #02221A; /* Or your desired dark background color */
@@ -153,14 +161,7 @@ const OurMissionDescription = styled.p`
   padding: 20px;
 `;
 
-const LineImage = styled.img`
-  position: absolute;
-  bottom: 10px; /* Adjust position as needed */
-  left: 50%;
-  transform: translateX(-50%); 
-  width: 80%;  
-  height: auto;
-`;
+
 
 const Home = () => {
   const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0);
@@ -198,14 +199,14 @@ const Home = () => {
             <AboutUsImage src={homeImage} alt="About" />
           </RightContainer>
         </AboutUsContainer>
-        <TestimonialContainer>
+          <TestimonialContainer>
           <LeftArrowButton onClick={previousTestimonial}>&lt;</LeftArrowButton>
-        <div> 
+          <TestimonialWrapper>
           <TestimonialText>{testimonials[currentTestimonialIndex].text}</TestimonialText>
           <TestimonialAuthor>- {testimonials[currentTestimonialIndex].author}</TestimonialAuthor>
-        </div>
+          </TestimonialWrapper>
           <RightArrowButton onClick={nextTestimonial}>&gt;</RightArrowButton>
-        </TestimonialContainer>
+          </TestimonialContainer>
         <OurMissionContainer>
           <OurMissionTitle>Our Mission</OurMissionTitle>
           <OurMissionDescription>
