@@ -1,7 +1,7 @@
 // src/pages/Home.js
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import homeImage from '../assets/home.png';
+import homeImage from '../assets/amenities/home.png';
 
 
 
@@ -78,7 +78,7 @@ const TourButton = styled.button`
 `;
 
 const AboutUsImage = styled.img`
-  max-width: 60%;
+  max-width: 70%;
   height: auto;
  
 `;

@@ -43,9 +43,9 @@ const Header = () => (
     <LeftNavLinks> 
       <Logo src={logo} alt="Shalom Residency Logo" />
       <NavLink to="/">About</NavLink>
-      <NavLink to="/properties">Properties</NavLink>
+      <NavLink to="/property">Properties</NavLink>
       <NavLink to="/resident">Resident</NavLink>
-      <NavLink to="/resident">Tour</NavLink>
+      <NavLink to="/tour">Tour</NavLink>
     </LeftNavLinks>
     <ContactLink to="/contact">Contact Us</ContactLink> 
   </HeaderContainer>
