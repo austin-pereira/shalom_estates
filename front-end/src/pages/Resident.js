@@ -49,27 +49,58 @@ const Button = styled.button`
   }
 `;
 
+const Input = styled.input`
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 95%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+`;
+
 const MaintenanceRequestForm = () => {
-  const [formData, setFormData] = useState({
-    unitNo: '',
-    room: '',
-    problem: '',
-    urgency: ''
-  });
+    const [formData, setFormData] = useState({
+        unitNo: '',
+        room: '',
+        problem: '',
+        urgency: '',
+        phoneNumber: '' // New field for phone number
+      });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
-  };
+      const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prevState => ({
+          ...prevState,
+          [name]: value
+        }));
+      };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Here you would call your backend which interacts with Twilio
-    console.log('Form data submitted:', formData);
-  };
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        const apiEndpoint = 'http://localhost:4000/send-sms';  // Ensure this matches your server port and endpoint
+    
+        fetch(apiEndpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+          alert('Message sent successfully!');
+          console.log('Server response:', data);
+        })
+        .catch(error => {
+          console.error('Error sending message:', error);
+          alert('Error sending message. Please try again.');
+        });
+    };
+    
 
   return (
     <FormContainer>
@@ -94,18 +125,14 @@ const MaintenanceRequestForm = () => {
           <option value="Living Room">Living Room</option>
           <option value="Kitchen">Kitchen</option>
         </Select>
-        <Textarea
-          name="problem"
-          placeholder="Problem:"
-          value={formData.problem}
-          onChange={handleChange}
-        />
+        <Textarea name="problem" value={formData.problem} onChange={handleChange} placeholder="Problem:" />
         <Select name="urgency" value={formData.urgency} onChange={handleChange}>
           <option value="">Select Urgency</option>
           <option value="Low">Low</option>
           <option value="Medium">Medium</option>
           <option value="High">High</option>
         </Select>
+        <Input name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} placeholder="Your Phone Number" />
         <Button type="submit">Submit</Button>
       </form>
     </FormContainer>

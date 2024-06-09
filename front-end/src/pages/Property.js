@@ -10,6 +10,7 @@ import pet from "../assets/amenities/pet.png";
 import water from "../assets/amenities/water.png";
 import maintenance from "../assets/amenities/maintainance.png";
 
+
 const AmenitiesListContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -146,12 +147,12 @@ const Property = () => {
   const propertiesData = [
     {
       address: "Shalom Residency",
-      city: "Koppa Taluk, 577123",
+      city: "Koppa-Taluka, 577123",
       units: 8,
       link: "#"
     },
     {
-      address: "2030 Dwight Way",
+      address: "Sector-5, Vrindavan Society",
       city: "Belapur, 400614",
       units: 1,
       link: "#"

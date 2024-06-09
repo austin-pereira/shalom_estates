@@ -7,6 +7,8 @@ import About from './pages/About';
 import Property from './pages/Property';
 import MaintenanceRequestForm from './pages/Resident';
 
+import TourBookingForm from './pages/Tour';
+
 const App = () => (
   <Router>
     <Layout>
@@ -15,6 +17,8 @@ const App = () => (
         <Route path="/contact" element={<Contact />} />
         <Route path="/property" element={<Property />} />
         <Route path="/resident" element={<MaintenanceRequestForm />} />
+        
+        <Route path="/tour" element={<TourBookingForm />} />
       </Routes>
     </Layout>
   </Router>
