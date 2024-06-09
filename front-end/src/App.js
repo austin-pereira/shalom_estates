@@ -5,6 +5,7 @@ import Layout from './components/Layout';
 import Contact from './pages/Contact';
 import About from './pages/About';
 import Property from './pages/Property';
+import MaintenanceRequestForm from './pages/Resident';
 
 const App = () => (
   <Router>
@@ -13,6 +14,7 @@ const App = () => (
         <Route path="/" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/property" element={<Property />} />
+        <Route path="/resident" element={<MaintenanceRequestForm />} />
       </Routes>
     </Layout>
   </Router>
