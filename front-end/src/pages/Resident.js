@@ -58,13 +58,13 @@ const Input = styled.input`
 `;
 
 const MaintenanceRequestForm = () => {
-    const [formData, setFormData] = useState({
-        unitNo: '',
-        room: '',
-        problem: '',
-        urgency: '',
-        phoneNumber: '' // New field for phone number
-      });
+  const [formData, setFormData] = useState({
+    unitNo: '',
+    room: '',
+    problem: '',
+    urgency: '',
+    email: '' // Changed from phoneNumber to email
+  });
 
       const handleChange = (e) => {
         const { name, value } = e.target;
@@ -75,31 +75,35 @@ const MaintenanceRequestForm = () => {
       };
 
       const handleSubmit = async (e) => {
-        e.preventDefault();
-        const apiEndpoint = 'http://localhost:4000/send-sms';  // Ensure this matches your server port and endpoint
+        e.preventDefault(); 
+        const apiEndpoint = 'http://localhost:4000/submit-maintenance';
     
-        fetch(apiEndpoint, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData)
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-          alert('Message sent successfully!');
-          console.log('Server response:', data);
-        })
-        .catch(error => {
+        try {
+          const response = await fetch(apiEndpoint, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+          });
+    
+          const data = await response.json(); 
+    
+          if (response.ok) {
+            alert(data.message || 'Message sent successfully!'); // Use server message if available
+            console.log('Server response:', data);
+            // You can reset the form here if needed:
+            setFormData({ unitNo: '', room: '', problem: '', urgency: '', email: '' }); 
+          } else {
+            // Handle specific backend errors (if provided)
+            throw new Error(data.error || 'Network response was not ok');
+          }
+        } catch (error) {
           console.error('Error sending message:', error);
-          alert('Error sending message. Please try again.');
-        });
-    };
+          alert(error.message || 'Error sending message. Please try again.');
+        }
+      };
+    
     
 
   return (
@@ -132,7 +136,9 @@ const MaintenanceRequestForm = () => {
           <option value="Medium">Medium</option>
           <option value="High">High</option>
         </Select>
-        <Input name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} placeholder="Your Phone Number" />
+        <Input name="email" // Changed from phoneNumber to email
+               value={formData.email} onChange={handleChange} 
+               placeholder="Your Email Address" />
         <Button type="submit">Submit</Button>
       </form>
     </FormContainer>

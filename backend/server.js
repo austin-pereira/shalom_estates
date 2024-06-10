@@ -1,57 +1,55 @@
+require('dotenv').config(); 
 const express = require('express');
 const bodyParser = require('body-parser');
-const twilio = require('twilio');
+const cors = require('cors');
+const nodemailer = require('nodemailer');
 
 const app = express();
-const port = process.env.PORT || 4000;
+const port = 4000; 
 
-require('dotenv').config();
+const emailUser = process.env.EMAIL_USER;
+const emailPassword = process.env.EMAIL_PASSWORD;
 
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
-const twilioPhoneNumber = process.env.TWILIO_PHONE_NUMBER; // Ensure your Twilio phone number starts with '+'
-const ownerPhoneNumber = '+919323162131'; // Business owner's phone number, hardcoded
+// Recipient email (Replace with your actual recipient email)
+const recipientEmail = 'your_recipient_email@example.com';
 
-// Initialize twilio client
-const client = new twilio(accountSid, authToken);
-
-app.use(bodyParser.json()); // Support JSON-encoded bodies
-app.use(bodyParser.urlencoded({ extended: true })); // Support URL-encoded bodies
-
-// POST endpoint for maintenance requests
-app.post('/send-sms', async (req, res) => {
-    const { unitNo, room, problem, urgency, phoneNumber } = req.body;
-    const messageBody = `Maintenance Request from Unit ${unitNo}, Room: ${room}. Problem: ${problem}. Urgency: ${urgency}.`;
-    const formattedPhoneNumber = `+91${phoneNumber}`; // Automatically prepend +91 to phone numbers
-
-    try {
-        // Sending SMS message to the resident
-        const messageResident = await client.messages.create({
-            body: messageBody,
-            to: formattedPhoneNumber,
-            from: twilioPhoneNumber
-        });
-
-        // Sending SMS message to the business owner
-        const messageOwner = await client.messages.create({
-            body: messageBody,
-            to: ownerPhoneNumber,
-            from: twilioPhoneNumber
-        });
-
-        res.json({
-            message: 'Messages sent successfully!',
-            details: {
-                residentMessageId: messageResident.sid,
-                ownerMessageId: messageOwner.sid
-            }
-        });
-    } catch (error) {
-        console.error('Failed to send message:', error);
-        res.status(500).json({ error: `Error sending message: ${error.message}` });
-    }
+// Configure Nodemailer transporter
+const transporter = nodemailer.createTransport({
+  service: 'Gmail', // Or your email provider
+  auth: {
+    user: emailUser,
+    pass: emailPassword,
+  },
 });
 
+// Middleware
+app.use(bodyParser.json());
+app.use(cors());  // Enable CORS for all origins (adjust as needed)
+
+// API Endpoint for Handling Maintenance Requests
+app.post('/submit-maintenance', async (req, res) => {
+  try {
+    const { unitNo, room, problem, urgency, email } = req.body;
+
+    const mailOptions = {
+      from: emailUser,
+      to: recipientEmail, 
+      cc: email,  // Include the user's email in CC
+      subject: 'Maintenance Request',
+      text: `New Maintenance Request Received:\n\nUnit: ${unitNo}\nRoom: ${room}\nProblem: ${problem}\nUrgency: ${urgency}\n\nSubmitted by: ${email}`, // Include user's email in the message
+    };
+
+    await transporter.sendMail(mailOptions); // Send the email
+
+    res.json({ success: true, message: 'Maintenance request submitted successfully' });
+  } catch (error) {
+    console.error('Error sending email:', error);
+    res.status(500).json({ success: false, error: 'Failed to submit request. Please try again later.' });
+  }
+});
+
+
+// Start the Server
 app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+  console.log(`Server running at http://localhost:${port}/`);
 });
