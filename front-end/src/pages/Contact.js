@@ -11,7 +11,7 @@ const Contact = () => {
             <p>9F3W+FF5, Chikkamagaluru - Sringeri Road,</p>
             <p>Jayapura, Koppa Taluk, 577123</p>
 
-            <p>Phone No: 9323162131</p>
+            <p>Phone No: +91 9323162131</p>
             <p>Email Address: anilpereira30@gmail.com</p>
 
             <h2>Enquiry Hours:</h2>

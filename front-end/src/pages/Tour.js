@@ -102,14 +102,37 @@ const TourBookingForm = ({ places }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form data submitted:', formData);
-    alert('Tour booked successfully!');
+
+    const apiEndpoint = 'http://localhost:4000/book-tour'; // Updated endpoint
+
+    try {
+      const response = await fetch(apiEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        alert('Tour booked successfully!');
+        setFormData({
+          firstName: '',
+          lastName: '',
+          date: '',
+          phoneNo: '',
+          visitors: '',
+        }); // Reset the form
+      } else {
+        throw new Error('Network response was not ok');
+      }
+    } catch (error) {
+      console.error('Error booking tour:', error);
+      alert('Error booking tour. Please try again.');
+    }
   };
-
-
-
 
 
   return (
@@ -148,7 +171,7 @@ const TourBookingForm = ({ places }) => {
           type="number" 
           value={formData.visitors} 
           onChange={handleChange} 
-          placeholder="Visitors"
+          placeholder="Number of Visitors"
         />
         <Button type="submit">Confirm</Button>
       </form>

@@ -48,6 +48,29 @@ app.post('/submit-maintenance', async (req, res) => {
   }
 });
 
+app.post('/book-tour', async (req, res) => {
+  try {
+    const { firstName, lastName, date, phoneNo, visitors } = req.body;
+
+    const mailOptions = {
+      from: emailUser,
+      to: recipientEmail, 
+      subject: 'New Tour Booking Request',
+      text: 
+`${firstName} ${lastName} wants to visit on ${date}.
+Their phone number is ${phoneNo}. 
+Number of visitors: ${visitors}`,
+    };
+
+    await transporter.sendMail(mailOptions);
+
+    res.json({ success: true, message: 'Tour booked successfully!' });
+  } catch (error) {
+    console.error('Error sending email:', error);
+    res.status(500).json({ success: false, error: 'Failed to book tour. Please try again later.' });
+  }
+});
+
 
 // Start the Server
 app.listen(port, () => {
