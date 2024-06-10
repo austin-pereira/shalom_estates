@@ -159,9 +159,31 @@ const OurMissionDescription = styled.p`
   max-width: 700px;; /* Limit width for readability */
   margin: 0 auto;  /* Center the description horizontally */
   padding: 20px;
+  padding-bottom: 20px;
 `;
 
 
+const OurFutureContainer = styled.div`
+  background-color: #E8E0D1;
+  color: white;
+  text-align: center;
+  padding: 100px 20px;
+  font-family: 'Jomolhari', serif;
+`;
+
+const OurFutureTitle = styled.h2`
+  color: #2E1503;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+`;
+
+const OurFutureDescription = styled.p`
+  line-height: 1.6;
+  color: #2E1503;
+  max-width: 600px; /* Or your desired width */
+  margin: 0 auto;
+  padding: 20px;
+`;
 
 const Home = () => {
   const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0);
@@ -210,17 +232,18 @@ const Home = () => {
         <OurMissionContainer>
           <OurMissionTitle>Our Mission</OurMissionTitle>
           <OurMissionDescription>
-            To provide exceptional living experiences in a vibrant, family-friendly community where comfort, 
-            convenience, and sustainability harmoniously coexist.
+          Shalom Residency is committed to exceeding the expectations of our residents. We believe in providing exceptional service through proactive maintenance, attentive staff, and prompt response to resident needs. Our well-designed and durable homes promote comfort and well-being, while our sustainable practices minimize our environmental impact and create a healthier community. We also prioritize community engagement, offering numerous opportunities for residents to connect, socialize, and build lasting memories together.
+          
           </OurMissionDescription>
+          
         </OurMissionContainer>
-        <OurMissionContainer>
-          <OurMissionTitle>Future Plans</OurMissionTitle>
-          <OurMissionDescription>
-            To provide exceptional living experiences in a vibrant, family-friendly community where comfort, 
-            convenience, and sustainability harmoniously coexist.
-          </OurMissionDescription>
-        </OurMissionContainer>
+        <OurFutureContainer>
+        <OurFutureTitle>Our Future</OurFutureTitle>
+        <OurFutureDescription>
+        At Shalom Residency, we envision a future where sustainable living is the norm, not the exception. We are dedicated to building a community that serves as a model for others, where residents enjoy a harmonious balance between modern comforts and environmental responsibility. Our mission is to empower families to live their best lives in a place they are proud to call home.  As part of our ongoing commitment to enhancing the Chikmagalur community, we are thrilled to announce our plans for a state-of-the-art service building. This new development will not only provide valuable amenities and services for our residents but also contribute to the growth of tourism in our beautiful region, attracting visitors who seek both modern comforts and a deep appreciation for nature.
+        </OurFutureDescription>
+        
+        </OurFutureContainer>
         </>
   );
 };
