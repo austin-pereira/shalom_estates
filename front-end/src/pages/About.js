@@ -6,9 +6,9 @@ import homeImage from '../assets/amenities/home.png';
 
 
 const testimonials = [
-  { text: "Great place to live!", author: "Alice Johnson" },
-  { text: "Love the community and amenities!", author: "Bob Smith" },
-  { text: "Highly recommend Shalom Residency!", author: "Eva Davis" },
+  { text: "Best Facilities in the area!.", author: "" },
+  { text: "Very Well Managed and Fast Maintainance Services.", author: "" },
+  { text: "Best Residency to rent out in Jayapura area!", author: "" },
 ];
 
 
@@ -106,14 +106,17 @@ const TestimonialWrapper = styled.div`
 `;
 
 const TestimonialText = styled.p`
-  font-size: 1.2rem;
+font-family: 'Jomolhari', serif;
+  font-size: 1.3rem;
   color: black;
   margin: 0; /* Removes default paragraph margin */
 `;
 
 const TestimonialAuthor = styled.p`
+font-family: 'Jomolhari', serif;
   font-style: italic;
   color: black;
+  font-size: 1rem;
 `;
 
 const ArrowButton = styled.button`
@@ -129,7 +132,7 @@ const ArrowButton = styled.button`
 `;
 
 const LeftArrowButton = styled(ArrowButton)`
-  left: 290px; /* Positioned close to the left edge */
+  left: 250px; /* Positioned close to the left edge */
 `;
 
 const RightArrowButton = styled(ArrowButton)`
@@ -164,7 +167,7 @@ const OurMissionDescription = styled.p`
 
 
 const OurFutureContainer = styled.div`
-  background-color: #E8E0D1;
+  background-color: #CDCDCD;
   color: white;
   text-align: center;
   padding: 100px 20px;
@@ -172,7 +175,7 @@ const OurFutureContainer = styled.div`
 `;
 
 const OurFutureTitle = styled.h2`
-  color: #2E1503;
+  color: black;
   font-size: 2.5rem;
   margin-bottom: 30px;
 `;
@@ -201,9 +204,11 @@ const Home = () => {
   };
 
   const previousTestimonial = () => {
-    setCurrentTestimonialIndex(prevIndex => 
-      prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1
-    );
+    setCurrentTestimonialIndex((prevIndex) => {
+      const newIndex = prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1;
+      console.log('Moving to previous testimonial:', newIndex); // Debug
+      return newIndex;
+    });
   };
   return (
     <>
