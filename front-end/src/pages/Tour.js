@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+
 import 'leaflet/dist/leaflet.css';
+import 'leaflet-providers';
 
 
 
@@ -51,31 +52,45 @@ const Button = styled.button`
   }
 `;
 
-
-const MapWrapper = styled.div`
+const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f5f5f5;  // Light grey background around the map
-  padding: 20px;
+  min-height: 70vh;
+  background-color: #D9D9D9; // Grey background
 `;
 
-const Sidebar = styled.div`
-  width: 200px;
-  height: 400px;
-  overflow-y: auto;
-  margin-right: 20px;
-  background: white;
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+// Styling for the box that contains the neighborhood information
+const InfoBox = styled.div`
+  width: 80%; // Increased width
+  max-width: 1000px; // Ensure it doesn't get too wide on large screens
+  background-color: #fff;
+  
+  padding: 30px;
+  padding-bottom: 100px;
+  margin: 10px;
+  text-align: center; // Center the text inside the box
 `;
 
-const PlaceItem = styled.div`
-  padding: 8px;
-  cursor: pointer;
+const Title = styled.h2`
+    font-family: 'Jomolhari', serif;
+    color: #333;
+`;
+
+const Item = styled.div`
+    font-family: 'Jomolhari', serif;
+    margin: 10px 0;
+`;
+
+const Link = styled.a`
+    font-family: 'Jomolhari', serif;
+    color: #0066cc;
+    text-decoration: none;
+
   &:hover {
-    background-color: #e8e8e8;
+    
+    color: #04453A;
+
   }
 `;
 
@@ -88,11 +103,6 @@ const TourBookingForm = ({ places }) => {
     visitors: ''
   });
 
-  const [selectedPosition, setSelectedPosition] = useState([13.3536424, 75.4936571]);
-
-  const handlePlaceClick = (lat, lng) => {
-    setSelectedPosition([lat, lng]);
-  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -177,21 +187,21 @@ const TourBookingForm = ({ places }) => {
       </form>
     </FormContainer>
     </PageContainer>
-    <MapWrapper>
-      <Sidebar>
-        {places && places.map((place, index) => (
-          <PlaceItem key={index} onClick={() => handlePlaceClick(place.latitude, place.longitude)}>
-            {place.name}
-          </PlaceItem>
-        ))}
-      </Sidebar>
-      <MapContainer center={selectedPosition} zoom={13} style={{ height: '400px', width: '600px' }}>
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-        <Marker position={selectedPosition}>
-          <Popup>A marker at the default or clicked location.</Popup>
-        </Marker>
-      </MapContainer>
-    </MapWrapper>
+    <Container>
+      <InfoBox>
+        <Title>Jayapura Neighborhood</Title>
+        <Item>
+          <strong>School Within 7 km:</strong> <Link href="https://www.google.com/maps/place/BGS+GROUP+OF+EDUCATION+INSTITUTION+JAYAPURA/@13.4022435,75.3689808,17z/data=!3m1!4b1!4m6!3m5!1s0x3bbb3fc038ea1ffd:0x236e25bbe69dea2e!8m2!3d13.4022435!4d75.3715557!16s%2Fg%2F11j4pxb_gg?authuser=0&entry=ttu" target="_blank">(Link)</Link>
+        </Item>
+        <Item>
+          <strong>Market Within 7 km:</strong> <Link href="https://www.google.com/maps/place/BGS+GROUP+OF+EDUCATION+INSTITUTION+JAYAPURA/@13.4022435,75.3689808,17z/data=!3m1!4b1!4m6!3m5!1s0x3bbb3fc038ea1ffd:0x236e25bbe69dea2e!8m2!3d13.4022435!4d75.3715557!16s%2Fg%2F11j4pxb_gg?authuser=0&entry=ttu" target="_blank">(Link)</Link>
+        </Item>
+        <Item>
+          <strong>Religious Institution Within 7km:</strong> <Link href="https://www.google.com/maps/place/BGS+GROUP+OF+EDUCATION+INSTITUTION+JAYAPURA/@13.4022435,75.3689808,17z/data=!3m1!4b1!4m6!3m5!1s0x3bbb3fc038ea1ffd:0x236e25bbe69dea2e!8m2!3d13.4022435!4d75.3715557!16s%2Fg%2F11j4pxb_gg?authuser=0&entry=ttu" target="_blank">(Link)</Link>
+        </Item>
+      </InfoBox>
+    </Container>
+    
     </>
   );
 };

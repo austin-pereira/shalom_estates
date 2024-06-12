@@ -17,7 +17,6 @@ const App = () => (
         <Route path="/contact" element={<Contact />} />
         <Route path="/property" element={<Property />} />
         <Route path="/resident" element={<MaintenanceRequestForm />} />
-        
         <Route path="/tour" element={<TourBookingForm />} />
       </Routes>
     </Layout>
