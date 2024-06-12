@@ -62,14 +62,23 @@ const Container = styled.div`
 
 // Styling for the box that contains the neighborhood information
 const InfoBox = styled.div`
-  width: 80%; // Increased width
-  max-width: 1000px; // Ensure it doesn't get too wide on large screens
+  width: 80%;
+  max-width: 1000px;
   background-color: #fff;
-  
   padding: 30px;
-  padding-bottom: 100px;
+  padding-bottom: 100px; /* Adjust for more/less shadow space */
   margin: 10px;
-  text-align: center; // Center the text inside the box
+  text-align: center;
+
+  /* Border Styles */
+  
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2); /* Initial subtle shadow */
+
+  /* Hover Effect */
+  &:hover {
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3); /* Increased shadow on hover */
+    transform: translateY(-3px); /* Slight lift on hover */
+  }
 `;
 
 const Title = styled.h2`
@@ -80,6 +89,10 @@ const Title = styled.h2`
 const Item = styled.div`
     font-family: 'Jomolhari', serif;
     margin: 10px 0;
+
+    font-weight: ${props => props.isTitle ? 'bold' : 'normal'};
+    /* Apply style only if the Item has the section-title class AND contains a colon */
+  
 `;
 
 const Link = styled.a`
@@ -93,6 +106,8 @@ const Link = styled.a`
 
   }
 `;
+
+
 
 const TourBookingForm = ({ places }) => {
   const [formData, setFormData] = useState({
@@ -190,15 +205,60 @@ const TourBookingForm = ({ places }) => {
     <Container>
       <InfoBox>
         <Title>Jayapura Neighborhood</Title>
-        <Item>
-          <strong>School Within 7 km:</strong> <Link href="https://www.google.com/maps/place/BGS+GROUP+OF+EDUCATION+INSTITUTION+JAYAPURA/@13.4022435,75.3689808,17z/data=!3m1!4b1!4m6!3m5!1s0x3bbb3fc038ea1ffd:0x236e25bbe69dea2e!8m2!3d13.4022435!4d75.3715557!16s%2Fg%2F11j4pxb_gg?authuser=0&entry=ttu" target="_blank">(Link)</Link>
+        <Item className="section-title" isTitle={true}>
+          Schools Within 7 km:
         </Item>
         <Item>
-          <strong>Market Within 7 km:</strong> <Link href="https://www.google.com/maps/place/BGS+GROUP+OF+EDUCATION+INSTITUTION+JAYAPURA/@13.4022435,75.3689808,17z/data=!3m1!4b1!4m6!3m5!1s0x3bbb3fc038ea1ffd:0x236e25bbe69dea2e!8m2!3d13.4022435!4d75.3715557!16s%2Fg%2F11j4pxb_gg?authuser=0&entry=ttu" target="_blank">(Link)</Link>
+          <strong>Sri Sathya Sai Srinikethanam </strong> <Link href="https://maps.app.goo.gl/dmtRQHghigom2tg9A" target="_blank">(Link)</Link>
         </Item>
         <Item>
-          <strong>Religious Institution Within 7km:</strong> <Link href="https://www.google.com/maps/place/BGS+GROUP+OF+EDUCATION+INSTITUTION+JAYAPURA/@13.4022435,75.3689808,17z/data=!3m1!4b1!4m6!3m5!1s0x3bbb3fc038ea1ffd:0x236e25bbe69dea2e!8m2!3d13.4022435!4d75.3715557!16s%2Fg%2F11j4pxb_gg?authuser=0&entry=ttu" target="_blank">(Link)</Link>
+          <strong>BGS group of Education Jayapura </strong> <Link href="https://www.google.com/maps/place/BGS+GROUP+OF+EDUCATION+INSTITUTION+JAYAPURA/@13.4022435,75.3689808,17z/data=!3m1!4b1!4m6!3m5!1s0x3bbb3fc038ea1ffd:0x236e25bbe69dea2e!8m2!3d13.4022435!4d75.3715557!16s%2Fg%2F11j4pxb_gg?authuser=0&entry=ttu" target="_blank">(Link)</Link>
         </Item>
+        <Item>
+          <strong>Government Higher Primary School </strong> <Link href="https://maps.app.goo.gl/4DUanT9DR6rfB2Mt7" target="_blank">(Link)</Link>
+        </Item>
+        <Item>
+          <strong>Sri Adichunchanagiri Pre-University College </strong> <Link href="https://maps.app.goo.gl/V9mxqQG1ZhfQmv1HA" target="_blank">(Link)</Link>
+        </Item>
+        <Item className="section-title" isTitle={true}>
+          Market Within 4 km: 
+        </Item>
+        <Item>
+          <strong>Vegetable Market </strong> <Link href="https://maps.app.goo.gl/VZpP48CENPvAVNBX7" target="_blank">(Link)</Link>
+        </Item>
+        <Item>
+          <strong>Al Safi Meat House </strong> <Link href="https://maps.app.goo.gl/VZpP48CENPvAVNBX7" target="_blank">(Link)</Link>
+        </Item>
+       
+        
+        <Item className="section-title" isTitle={true}>
+        Nearest Hospitals: 
+        </Item>
+        <Item>
+          <strong>Primary Health Centre </strong>  <Link href="https://maps.app.goo.gl/G34oJVmELQL1hnhT7" target="_blank">(Link)</Link>
+        </Item>
+        <Item>
+          <strong>Government Hospital </strong> <Link href="https://maps.app.goo.gl/Ef5BGJNUBhNaAnGp7" target="_blank">(Link)</Link>
+        </Item>
+
+        <Item className="section-title" isTitle={true}>
+        Religious Institutions Nearby:
+        </Item>
+        
+        <Item>
+        <strong>St. Rita's Church, Jayapura </strong><Link href="https://maps.app.goo.gl/MPSWD6HcVzmWR3gKA" target="_blank">(Link)</Link>
+        </Item>
+        <Item>
+        <strong>Shree Sangameshwara Temple </strong><Link href="https://maps.app.goo.gl/HciuovCUcv41RrYd6" target="_blank">(Link)</Link>
+        </Item>
+        <Item>
+        <strong>Mosque </strong><Link href="https://maps.app.goo.gl/NT9mGGENrgU5ottn9" target="_blank">(Link)</Link>
+        </Item>
+        <Item>
+        <strong>Durgaparameshwari Temple </strong><Link href="https://maps.app.goo.gl/qmE5sZBxzg8mdPan7" target="_blank">(Link)</Link>
+        </Item>
+        
+        
       </InfoBox>
     </Container>
     
