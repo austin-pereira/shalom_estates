@@ -2,6 +2,7 @@
   "name": "real-estate-website",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://austin-pereira.github.io/shalom_estates",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -17,6 +18,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -42,6 +45,7 @@
   },
   "devDependencies": {
     "eslint": "^8.57.0",
-    "eslint-plugin-jest": "^28.6.0"
+    "eslint-plugin-jest": "^28.6.0",
+    "gh-pages": "^6.1.1"
   }
 }
