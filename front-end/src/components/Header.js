@@ -42,7 +42,7 @@ const Header = () => (
   <HeaderContainer>
     <LeftNavLinks> 
       <Logo src={logo} alt="Shalom Residency Logo" />
-      <NavLink to="/">About</NavLink>
+      <NavLink to="/shalom_estates">About</NavLink>
       <NavLink to="/property">Properties</NavLink>
       <NavLink to="/resident">Resident</NavLink>
       <NavLink to="/tour">Tour</NavLink>
