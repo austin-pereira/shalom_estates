@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/shalom_estates/static/css/main.9629e1fe.css",
+    "main.js": "/shalom_estates/static/js/main.5774f588.js",
+    "static/media/home.png": "/shalom_estates/static/media/home.c026fb6faf47db46ef9e.png",
+    "static/media/file.png": "/shalom_estates/static/media/file.75b03dfcb8425b284d60.png",
+    "static/media/logo.png": "/shalom_estates/static/media/logo.aea278e62213d0a73a99.png",
+    "static/media/furnished.png": "/shalom_estates/static/media/furnished.c642f3ccf82cf48be8a2.png",
+    "static/media/gates.png": "/shalom_estates/static/media/gates.943c60f2efca54df34c0.png",
+    "static/media/balcony.png": "/shalom_estates/static/media/balcony.ac0ebb67eea569ba61b6.png",
+    "index.html": "/shalom_estates/index.html",
+    "main.9629e1fe.css.map": "/shalom_estates/static/css/main.9629e1fe.css.map",
+    "main.5774f588.js.map": "/shalom_estates/static/js/main.5774f588.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9629e1fe.css",
+    "static/js/main.5774f588.js"
+  ]
+}
